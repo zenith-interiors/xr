@@ -4,6 +4,38 @@
 <meta charset="utf-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, user-scalable=no,
+  minimum-scale=1.0, maximum-scale=1.0">
+<!-- 💁 Include both scripts below to support all browsers! -->
+
+  <!-- Loads <model-viewer> for modern browsers: -->
+  <script type="module"
+      src="https://unpkg.com/@google/model-viewer/dist/model-viewer.js">
+  </script>
+
+  <!-- Loads <model-viewer> for old browsers like IE11: -->
+  <script nomodule
+      src="https://unpkg.com/@google/model-viewer/dist/model-viewer-legacy.js">
+  </script>
+
+  <!-- The following libraries and polyfills are recommended to maximize browser support -->
+  <!-- NOTE: you must adjust the paths as appropriate for your project -->
+      
+  <!-- 🚨 REQUIRED: Web Components polyfill to support Edge and Firefox < 63 -->
+  <script src="https://unpkg.com/@webcomponents/webcomponentsjs@2.1.3/webcomponents-loader.js"></script>
+
+  <!-- 💁 OPTIONAL: Intersection Observer polyfill for better performance in Safari and IE11 -->
+  <script src="https://unpkg.com/intersection-observer@0.5.1/intersection-observer.js"></script>
+
+  <!-- 💁 OPTIONAL: Resize Observer polyfill improves resize behavior in non-Chrome browsers -->
+  <script src="https://unpkg.com/resize-observer-polyfill@1.5.1/dist/ResizeObserver.js"></script>
+
+  <!-- 💁 OPTIONAL: Fullscreen polyfill is required for experimental AR features in Canary -->
+  <!--<script src="https://unpkg.com/fullscreen-polyfill@1.0.2/dist/fullscreen.polyfill.js"></script>-->
+
+  <!-- 💁 OPTIONAL: Include prismatic.js for Magic Leap support -->
+  <!--<script src="https://unpkg.com/@magicleap/prismatic@0.18.2/prismatic.min.js"></script>-->
+
 <title>EDO</title>
 <style id="applicationStylesheet" type="text/css">
 	.mediaViewInfo {
@@ -617,18 +649,19 @@
 		color: rgba(0,0,0,1);
 	}
 	#MODEL_DISPLAY {
-		left: 71px;
-		top: 361px;
-		position: absolute;
-		overflow: visible;
-		width: 288px;
-		white-space: nowrap;
-		text-align: center;
-		font-family: Futura LT Pro;
-		font-style: normal;
-		font-weight: bold;
-		font-size: 30px;
-		color: rgba(0,0,0,1);
+    left: 0;
+    top: 222px;
+    position: absolute;
+    overflow: visible;
+    width: 100%;
+    white-space: nowrap;
+    text-align: center;
+    font-family: Futura LT Pro;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 30px;
+    color: rgba(0,0,0,1);
+    height: 335px;
 	}
 	#Group_15 {
 		position: absolute;
@@ -682,6 +715,8 @@
 		font-size: 37px;
 		color: rgba(255,255,255,1);
 	}
+#modelViewer {
+}
 </style>
 <script id="applicationScript">
 ///////////////////////////////////////
@@ -3524,7 +3559,7 @@ window.application = new Application();
 </head>
 <body>
 <div id="EDO">
-	<div id="Group_18">
+  <div id="Group_18">
 		<div onclick="application.goToTargetView(event)" id="HOME_d">
 			<span>HOME</span>
 		</div>
@@ -3554,16 +3589,21 @@ window.application = new Application();
 		<div id="EDO_ee">
 			<span>EDO</span>
 		</div>
-	</div>
-	<svg class="Rectangle_45">
-		<rect id="Rectangle_45" rx="0" ry="0" x="0" y="0" width="386" height="339">
-		</rect>
-	</svg>
+  </div>
+	
+<div id="MODEL_DISPLAY"><model-viewer src="assets/EDO/EDO_Meet.glb" 
+                ios-src="assets/EDO/EDO_Meet.usdz"
+                ar
+                auto-rotate 
+                camera-controls 
+                shadow-intensity="1" 
+                alt="EDO Meeting Pod" background-color="#70BCD1"> </model-viewer></div>
+	
 	<div id="Scroll_Group_4">
 		<svg class="Rectangle_46">
 			<rect id="Rectangle_46" rx="0" ry="0" x="0" y="0" width="182" height="177">
 			</rect>
-		</svg>
+	  </svg>
 		<svg class="Rectangle_47">
 			<rect id="Rectangle_47" rx="0" ry="0" x="0" y="0" width="182" height="177">
 			</rect>
@@ -3646,10 +3686,7 @@ window.application = new Application();
 		<div id="MODEL_12">
 			<span>MODEL 12</span>
 		</div>
-	</div>
-	<div id="MODEL_DISPLAY">
-		<span>MODEL DISPLAY</span>
-	</div>
+  </div>
 	<div onclick="application.goToTargetView(event)" id="Group_15">
 		<svg class="Rectangle_1_e">
 			<rect id="Rectangle_1_e" rx="0" ry="0" x="0" y="0" width="428" height="167">
@@ -3663,5 +3700,6 @@ window.application = new Application();
 		</div>
 	</div>
 </div>
+
 </body>
 </html>
